@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>命令控制台</title>
+    <script src="./js/jquery-2.2.4.min.js"></script>
+    <script src="./js/win10.child.js"></script>
+    <style>
+        .btn{
+            margin: 20px;
+            width: 160px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 16px;
+            color: white;
+            background-color: #2D93CA;
+            border-radius: 3px;
+            transition: all 0.5s;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn:hover{
+            background-color: #256d95;
+        }
+    </style>    
+</head>
+<body>
+	<div class="btn max" >窗口最大化</div>
+    <div class="btn min" >窗口最小化</div>
+    <div class="btn normal" >窗口复原</div>
+</body>
+<script>
+	
+	$('.max').on('click',function(){
+		S.callJava('Max');	
+	});
+	
+	$('.min').on('click',function(){
+		S.callJava('Min');	
+	});
+	
+	$('.normal').on('click',function(){
+		S.callJava('Normal');	
+	});
+	
+	
+	
+	
+</script>
+</html>

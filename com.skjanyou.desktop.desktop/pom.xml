@@ -1,0 +1,278 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.skjanyou</groupId>
+		<artifactId>com.skjanyou.desktop.parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../com.skjanyou.desktop.parent/pom.xml</relativePath>
+	</parent>
+
+	<artifactId>com.skjanyou.desktop.desktop</artifactId>
+	<packaging>jar</packaging>
+	<name>com.skjanyou.desktop.desktop</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.skjanyou</groupId>
+			<artifactId>com.skjanyou.util</artifactId>
+		</dependency>
+
+		<!-- spider dependency -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient-cache</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mozilla</groupId>
+			<artifactId>rhino</artifactId>
+		</dependency>
+
+		<!-- json处理工具 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-jaxb-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.skjanyou</groupId>
+			<artifactId>com.skjanyou.desktop.api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- application -->
+		<dependency>
+			<groupId>com.skjanyou</groupId>
+			<artifactId>com.skjanyou.appl.Application</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.skjanyou</groupId>
+					<artifactId>com.skjanyou.appl.AppPlugin</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.skjanyou</groupId>
+					<artifactId>com.skjanyou.appl.AppClassloader</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.skjanyou</groupId>
+					<artifactId>com.skjanyou.appl.AppAnnotationloader</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.eclipse.platform</groupId> -->
+<!-- 			<artifactId>org.eclipse.ui.forms</artifactId> -->
+<!-- 			<version>3.7.1</version> -->
+<!-- 		</dependency> -->
+
+		<dependency>
+			<groupId>tuuzed.lib.microhttpd</groupId>
+			<artifactId>tuuzed.lib.microhttpd</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.42</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.skjanyou</groupId>
+			<artifactId>com.skjanyou.desktop.application.demo</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.skjanyou</groupId>
+			<artifactId>com.skjanyou.desktop.application.cicd</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- 资源搜索工具 -->
+		<dependency>
+			<groupId>org.reflections</groupId>
+			<artifactId>reflections</artifactId>
+			<version>0.9.12-SNAPSHOT</version>
+		</dependency>
+
+	</dependencies>
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>appassembler-maven-plugin</artifactId>
+				<version>1.7</version>
+				<configuration>
+					<configurationDirectory>etc</configurationDirectory>
+					<includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+					<repositoryLayout>flat</repositoryLayout>
+					<useWildcardClassPath>true</useWildcardClassPath>
+					<daemons>
+						<daemon>
+							<id>skjanyou-desktop</id>
+							<mainClass>com.skjanyou.desktop.desktop.swt.Start</mainClass>
+							<commandLineArguments>
+								<commandLineArgument>start</commandLineArgument>
+							</commandLineArguments>
+							<platforms>
+								<platform>jsw</platform>
+							</platforms>
+							<jvmSettings>
+								<!-- 启动内存配置 -->
+								<maxStackSize>128</maxStackSize>
+								<systemProperties>
+									<systemProperty>WRAPPER_HOME=.</systemProperty>
+									<systemProperty>log4j.configurationFile=log4j.xml</systemProperty>
+									<systemProperty>ltts.vmid=wrapper</systemProperty>
+									<systemProperty>file.encoding=utf-8</systemProperty>
+								</systemProperties>
+								<extraArguments>
+									<extraArgument>-server</extraArgument>
+									<extraArgument>-Xms5120m</extraArgument>
+									<extraArgument>-Xmx5120m</extraArgument>
+									<extraArgument>-XX:PermSize=512m</extraArgument>
+									<extraArgument>-XX:MaxPermSize=1024m</extraArgument>
+									<extraArgument>-XX:+UseFastAccessorMethods</extraArgument>
+									<extraArgument>-XX:+UseCompressedOops</extraArgument>
+									<extraArgument>-XX:+DisableExplicitGC</extraArgument>
+									<extraArgument>-XX:+ExplicitGCInvokesConcurrent</extraArgument>
+									<extraArgument>-XX:ParallelGCThreads=10</extraArgument>
+									<extraArgument>-XX:-UseAdaptiveSizePolicy</extraArgument>
+									<extraArgument>-Xmn1024m</extraArgument>
+									<extraArgument>-XX:SurvivorRatio=6</extraArgument>
+									<extraArgument>-XX:+UseConcMarkSweepGC</extraArgument>
+									<extraArgument>-XX:+CMSParallelRemarkEnabled</extraArgument>
+									<extraArgument>-XX:+UseCMSCompactAtFullCollection</extraArgument>
+									<extraArgument>-XX:+UseCMSInitiatingOccupancyOnly</extraArgument>
+									<extraArgument>-XX:CMSInitiatingOccupancyFraction=70</extraArgument>
+									<extraArgument>-XX:+PrintGCApplicationStoppedTime</extraArgument>
+									<extraArgument>-XX:+PrintGCApplicationConcurrentTime</extraArgument>
+									<extraArgument>-verbose:gc</extraArgument>
+									<extraArgument>-Xloggc:/gc.log</extraArgument>
+									<extraArgument>-XX:+PrintGCTimeStamps</extraArgument>
+									<extraArgument>-XX:+PrintGCDateStamps</extraArgument>
+									<extraArgument>-XX:-TraceClassUnloading</extraArgument>
+									<extraArgument>-XX:+PrintGCDetails</extraArgument>
+									<extraArgument>-Dcom.sun.management.jmxremote</extraArgument>
+									<extraArgument>-Dcom.sun.management.jmxremote.port=7091</extraArgument>
+									<extraArgument>-Dcom.sun.management.jmxremote.ssl=false</extraArgument>
+									<extraArgument>-Dcom.sun.management.jmxremote.authenticate=false</extraArgument>
+									<extraArgument>-XX:+HeapDumpOnOutOfMemoryError</extraArgument>
+									<extraArgument>-Dlog4j2.is.webapp=false</extraArgument>
+									<extraArgument>-Dlog4j2.enable.threadlocals=true</extraArgument>
+									<extraArgument>-DenableLog=true</extraArgument>
+									<extraArgument>-Dlog4j.initialReusableMsgSize=300</extraArgument>
+									<extraArgument>-DAsyncLoggerConfig.RingBufferSize=524288</extraArgument>
+								</extraArguments>
+							</jvmSettings>
+							<generatorConfigurations>
+								<generatorConfiguration>
+									<generator>jsw</generator>
+									<includes>
+										<include>linux-x86-64</include>
+										<include>windows-x86-64</include>
+									</includes>
+									<configuration>
+										<property>
+											<name>configuration.directory.in.classpath.first</name>
+											<value>etc</value>
+										</property>
+										<property>
+											<name>wrapper.ping.timeout</name>
+											<value>120</value>
+										</property>
+										<property>
+											<name>set.default.REPO_DIR</name>
+											<value>lib</value>
+										</property>
+										<property>
+											<name>wrapper.logfile</name>
+											<value>logs/wrapper.log</value>
+										</property>
+									</configuration>
+								</generatorConfiguration>
+							</generatorConfigurations>
+						</daemon>
+					</daemons>
+				</configuration>
+				<executions>
+					<execution>
+						<id>generate-jsw</id>
+						<phase>package</phase>
+						<goals>
+							<goal>generate-daemons</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>make-zip</id>
+						<!-- 绑定到package生命周期阶段上 -->
+						<phase>package</phase>
+						<goals>
+							<!-- 绑定到package生命周期阶段上 -->
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptors> <!--描述文件路径 -->
+								<descriptor>src/main/resources/assembly.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,18 @@
+
+
+.layui-layout-admin .header-supermsui {
+	border-bottom-color: #1AA094;
+	background-color: #fff;
+}
+
+#brief .layui-tab-close {
+	display: none;
+}
+
+#container {
+	margin-top:0px;
+}
+
+.layui-layout-admin .layui-side,.layui-layout-admin .layui-body {
+	top: 0px;
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skjanyou.desktop.application.cicd.mapper.CommandMapper">
+	<insert id="insert" parameterType="Command">
+	    insert into command(commandid,cmd,desc) values(#{commandid},#{cmd},#{desc})
+	</insert>
+	<delete id="delete" parameterType="Command">
+	    delete command where commandid = #{commandid}
+	</delete>
+	<update id="update" parameterType="Command">
+	    update command set cmd = #{cmd},desc = #{desc}
+	    where commandid = #{commandid}
+	</update>
+	<select id="detail" parameterType="Command" resultType="Command">
+	    select * from command where commandid = #{commandid}
+	</select>
+	<select id="query" parameterType="Command" resultType="Command">
+	    select * from command
+	</select>
+</mapper>

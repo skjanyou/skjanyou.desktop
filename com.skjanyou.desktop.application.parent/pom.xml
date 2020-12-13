@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+	<groupId>com.skjanyou</groupId>
+	<artifactId>com.skjanyou.desktop.parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>com.skjanyou.desktop.application.parent</artifactId>
+  <packaging>pom</packaging>
+  <name>skjanyou</name>
+  <description>skjanyou-desktop-demo</description>
+  <modules>
+  	<module>com.skjanyou.desktop.application.demo</module>
+  	<module>com.skjanyou.desktop.application.cicd</module>
+  	<module>com.skjanyou.desktop.application.generator</module>
+  	<module>com.skjanyou.desktop.application.CloudMusic</module>
+  	<module>com.skjanyou.desktop.application.ykcicd</module>
+  </modules>
+	<build>
+		<resources>
+			<resource>
+				<!-- 打包src/main/java下面所有xml文件 -->
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/**</include>
+				</includes>
+			</resource>
+			<resource>
+				<!-- 打包src/main/resources下面所有文件 -->
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>  
+</project>

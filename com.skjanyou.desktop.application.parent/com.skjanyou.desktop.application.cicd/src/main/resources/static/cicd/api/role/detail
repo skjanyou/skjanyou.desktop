@@ -1,0 +1,12 @@
+{
+	code : 0,
+	msg  : '查询成功!',
+	data : {
+		userid : '挡板数据',
+		username : '挡板数据',
+		sex : '挡板数据',
+		age : '挡板数据',
+		role : '挡板数据',
+		status : '挡板数据'
+	}
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skjanyou.desktop.application.cicd.mapper.OperationMapper">
+	<insert id="insert" parameterType="Operation">
+	    insert into operation(oprid,desc) values(#{oprid},#{desc})
+	</insert>
+	<delete id="delete" parameterType="Operation">
+	    delete from operation where oprid = #{oprid}
+	</delete>
+	<update id="update" parameterType="Operation">
+	    update operation set desc = #{desc}
+	    where oprid = #{oprid} 
+	</update>
+	<select id="detail" parameterType="Operation" resultType="Operation">
+	    select * from operation where oprid = #{oprid}
+	</select>
+	<select id="query" parameterType="Operation" resultType="Operation">
+	    select * from operation
+	</select>
+</mapper>

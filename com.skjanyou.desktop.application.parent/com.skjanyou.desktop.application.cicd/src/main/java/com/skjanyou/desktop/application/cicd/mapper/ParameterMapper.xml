@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skjanyou.desktop.application.cicd.mapper.ParameterMapper">
+	<insert id="insert" parameterType="Parameter">
+	    insert into parameter(oprid,pid,key,value) values(#{oprid},#{port},#{key},#{value})
+	</insert>
+	<delete id="delete" parameterType="Parameter">
+	    delete parameter where oprid = #{oprid} and pid = #{pid}
+	</delete>
+	<update id="update" parameterType="Parameter">
+	    update parameter set key = #{key},value = #{value}
+	    where oprid = #{oprid} and pid = #{pid}
+	</update>
+	<select id="detail" parameterType="Parameter" resultType="Parameter">
+	    select * from parameter where oprid = #{oprid} and pid = #{pid}
+	</select>
+	<select id="query" parameterType="Parameter" resultType="Parameter">
+	    select * from parameter
+	</select>
+</mapper>

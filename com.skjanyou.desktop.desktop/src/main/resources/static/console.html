@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>控制台</title>
+    <script src="./js/win10.child.js"></script>
+    <script type="text/javascript" src="js/console.js" ></script>
+</head>
+<body>
+</body>
+<script>
+//	window.console = function(base){
+//		var replaceConsole = {};
+//		for(var key in base){
+//			var fn = base[key];
+//			
+//			fn = function(key,basefn){
+//				return function(){
+//					var result = basefn.apply(this,arguments);
+//					var input = [].shift.call(arguments);
+//					
+//					log("console.log('" + input.toSource() + "');");
+//	
+//					return result;
+//				}
+//			}(key,fn);
+//			replaceConsole[key] = fn;
+//		}
+//		return replaceConsole;
+//	}(console);
+
+    screenLog.init();
+    screenLog.log('欢迎使用命令控制台');
+    
+</script>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <link rel="stylesheet" href="./layui/css/global.css">
+    <link rel="stylesheet" href="./css/index.css" />
+    <title>CI/CD模块</title>
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+			<ul class="layui-nav layui-nav-tree layui-inline" id="menu" lay-filter="menu" style="margin-right: 10px;"></ul>        	
+        </div>
+    </div>
+    <div class="layui-body">
+		<div class="layui-tab layui-tab-card" id="container" lay-filter="container" lay-allowclose="true">
+		  	<ul class="layui-tab-title">
+		  		<li class="layui-this" id="brief">项目简介</li>
+		  	</ul>
+		  	<div class="layui-tab-content" style="height: 150px;overflow-y: auto;overflow-x: hidden;">
+			    <div class="layui-tab-item layui-show">
+					<p>该应用提供服务启停功能。</p>
+			    </div>		  		
+		  	</div>
+		</div>       
+    </div>
+	<div class="layui-footer footer">
+		<div class="layui-main">
+			<p>2018 © <a href="#">superms</a>
+			</p>
+		</div>
+	</div>    
+</div>
+
+</body>
+<script src="./layui/layui.js"></script>
+<script src="./js/CONSTANT.js" ></script>
+<script src="./js/util.js" ></script>
+<script src="./js/index.js" ></script>
+<script src="./js/cicd.js" ></script>
+</html>

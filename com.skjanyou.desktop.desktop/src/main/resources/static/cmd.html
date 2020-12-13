@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>命令控制台</title>
+    <script src="./js/jquery-2.2.4.min.js"></script>
+    <script src="./js/win10.child.js"></script>
+    <style>
+        .btn{
+            margin: 20px;
+            width: 160px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 16px;
+            color: white;
+            background-color: #2D93CA;
+            border-radius: 3px;
+            transition: all 0.5s;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn:hover{
+            background-color: #256d95;
+        }
+        .output {
+        	width: 100%;
+        	height: 400%;
+        }
+        
+        .input_box {
+        	width: 100%;
+        	height: 40px;
+        }
+    </style>
+</head>
+<body>
+	<textarea class="output" id="output-text" readonly></textarea>
+	
+	<div class="input-box">
+		<input type="text" id="input-text"/>
+		<div class="btn" id="send">子页给父页发消息</div>
+	</div>
+</body>
+<script>
+	window.console = function(base){
+		var replaceConsole = {};
+		for(var key in base){
+			var fn = base[key];
+			
+			fn = function(key,basefn){
+				return function(){
+					var result = basefn.apply(this,arguments);
+					var input = [].shift.call(arguments);
+					
+					log("console.log('" + input.toSource() + "');");
+	
+					return result;
+				}
+			}(key,fn);
+			replaceConsole[key] = fn;
+		}
+		return replaceConsole;
+	}(console);
+
+	function log(input){
+		$("#output-text").val(input);		
+	}
+
+    $("#send").click(function(){
+    	var input = $("#input-text").val();
+		var r = '';
+		try{
+			r = eval(input);
+		}catch(e){
+			r = e;
+		}    	
+    	log(r);
+    });
+    
+</script>
+</html>

@@ -1,0 +1,99 @@
+主工程应当具备能力:
+1.控制窗体最大、最小、恢复、关闭功能。
+2.提供公共函数,并将公共函数注册到子Frame中。
+3.前端-->后端 同步、异步调用。						封装成函数,调用方式尽可能简单,并且不挂靠在其他插件上面。	√
+    后端-->前端 naive调用（发布订阅模式）。			最好做一个审计功能。								√
+    前端-->后端 naive调用（发布订阅模式）。			同上。											
+
+4.冲突Jar包排除,主要是新增应用包的依赖于其他应用甚至系统依赖的冲突。  
+5.wrapper在window环境下启动命令: wrapper-windows-x86-64.exe -c ../etc/wrapper.conf 
+
+开发相关:
+1.将环境分为开发、测试、生产三套环境。
+
+
+工程目录结构说明:
+	com.skjanyou.anime.desktop					--工程主目录
+	|	--src/main/java							--工程代码
+	|	--src/test/java							--工程测试代码
+	|	--src/main/resources					--工程资源文件
+		|	--assembly.xml						--工程打包配置文件
+		|	--system.properties					--系统配置文件,这个文件可以放置到外部
+		|	--log4j.properties					--系统日志文件
+	|	--config								--系统外部配置文件目录
+		|	--mimetypes.txt						--响应头部
+	|	--desktop								--这个目录下面放置桌面应用包
+	|	--plugins								--这个目录下面放置插件	
+
+
+应用工程目录结构说明:
+	com.skjanyou.desktop.application.demo		--工程主目录
+	|	--src/main/java							--工程代码
+	|	--src/test/java							--工程测试代码
+	|	--src/main/resources					--工程资源文件
+		|	--demo.view.properties				--应用的配置文件
+		|	--assembly.xml						--工程打包配置文件
+		|	--static							--静态资源文件
+			|	--css							--样式
+			|	--images						--图片
+			|	--js							--脚本
+			|	--plugins						--第三方插件
+			|	--html							--页面
+
+应用部署包内部结构说明:
+	com.skjanyou.desktop.application.demo.jar
+	|	--com/skjanyou/application/demo			--应用编译后代码
+	|	--demo.view.properties					--应用的配置文件
+	|	--static								--静态资源文件
+		|	--css								--样式
+		|	--images							--图片
+		|	--js								--脚本
+		|	--plugins							--第三方插件
+		|	--html								--页面
+				
+注:访问Jar包内部资源,需要添加上Jar的HashCode值作为前缀,例如: com.skjanyou.desktop.application.demo.jar!SDDSXCVSDFSDF/static/css/index.css,待实现	
+
+
+
+		
+		
+关于naive调用
+
+不错的思路，如果能做做到浏览器的检索能力和用户本机应用能力的完美融合就会有意思了。
+
+
+
+最近项目遇到这么个问题。客户要求用web页面，点击一个链接，调用本地的一个程序。
+ 
+参考了一下qq的方式。
+tencent://Message/?Uin=000000&websiteName=qzone.qq.com&Menu=yes
+ 
+在注册表里面添加下面，就能实现
+Windows Registry Editor Version 5.00
+[HKEY_CLASSES_ROOT\Tencent]
+"URL Protocol"="C:\\Program Files\\Tencent\\QQ\\Bin\\Timwp.exe"
+@="TencentProtocol"
+[HKEY_CLASSES_ROOT\Tencent\DefaultIcon]
+@="C:\\Program Files\\Tencent\\QQ\\Bin\\Timwp.exe,1"
+[HKEY_CLASSES_ROOT\Tencent\shell]
+[HKEY_CLASSES_ROOT\Tencent\shell\open]
+[HKEY_CLASSES_ROOT\Tencent\shell\open\command]
+@="\"C:\\Program Files\\Tencent\\QQ\\Bin\\Timwp.exe\" \"%1\""
+ 
+于是自己模仿着制作了一个，点击链接，弹出计算器。
+首先是链接，超级简单 <a href="bbfexe://123456">计算器</a>
+接下来就是建立注册表文件。复制下面代码到记事本，另存为.reg文件即可。
+Windows Registry Editor Version 5.00
+[HKEY_CLASSES_ROOT\bbfexe]
+"URL Protocol"="C:\\WINDOWS\\system32\\calc.exe"
+@="TencentProtocol"
+[HKEY_CLASSES_ROOT\bbfexe\DefaultIcon]
+@="C:\\WINDOWS\\system32\\calc.exe,1"
+[HKEY_CLASSES_ROOT\bbfexe\shell]
+[HKEY_CLASSES_ROOT\bbfexe\shell\open]
+[HKEY_CLASSES_ROOT\bbfexe\shell\open\command]
+@="\"C:\\WINDOWS\\system32\\calc.exe\" \"%1\""
+ 
+%1就是参数，在我的例子里面就是 123456
+winform 中 static void Main(string[] args) 
+args就是传过来的参数 %1		

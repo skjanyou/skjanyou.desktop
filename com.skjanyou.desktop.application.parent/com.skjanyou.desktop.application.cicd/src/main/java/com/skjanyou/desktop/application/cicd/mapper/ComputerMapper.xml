@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skjanyou.desktop.application.cicd.mapper.ComputerMapper">
+	<insert id="insert" parameterType="Computer">
+	    insert into computer(ip,port) values(#{ip},#{port})
+	</insert>
+	<delete id="delete" parameterType="Computer">
+	    delete computer where ip = #{ip} and port = #{prot}
+	</delete>
+	<update id="update">
+	    update computer set hostname = #{hostname},username = #{username},password = #{password}
+	    where ip = #{ip} and port = #{port}
+	</update>
+	<select id="detail" parameterType="Computer" resultType="Computer">
+	    select * from computer where ip = #{ip} and port = #{port}
+	</select>
+	<select id="query" parameterType="Computer" resultType="Computer">
+	    select * from computer
+	</select>
+</mapper>

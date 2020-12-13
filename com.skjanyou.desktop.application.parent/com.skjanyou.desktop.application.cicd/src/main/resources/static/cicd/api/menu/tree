@@ -1,0 +1,28 @@
+[
+ {
+	 "id" : "0",
+	 "title" : "权限管理",
+	 "icon" : "layui-icon",
+	 "children" : [
+	 	          {
+	 	        	 "id" : "01",
+	 	        	 "title" : "主机管理",
+	 	        	 "icon" : "&#xe612",
+	 	        	 "url" : "html/zhuji.html"
+	 	          },
+		          {
+	 	        	 "id" : "02",
+	 	        	 "title" : "命令管理",
+	 	        	 "icon" : "&#xe612",
+	 	        	 "url" : "html/mingling.html"
+	 	          },
+		          {
+	 	        	 "id" : "03",
+	 	        	 "title" : "操作管理",
+	 	        	 "icon" : "&#xe612",
+	 	        	 "url" : "html/caozuo.html"
+	 	          }	 	          
+	 ]
+		 
+ }
+]

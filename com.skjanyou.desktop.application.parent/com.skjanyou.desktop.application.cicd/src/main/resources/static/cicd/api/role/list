@@ -1,0 +1,17 @@
+{
+	"code":0,
+	"msg":"",
+	"count":1000,
+	"data":[
+	        {
+	        	"roleid":"system",
+	        	"rolename":"系统管理员",
+				"status":"S"
+			},
+	        {
+	        	"roleid":"normal",
+	        	"rolename":"普通用户",
+				"status":"S"
+			}			
+	]
+}

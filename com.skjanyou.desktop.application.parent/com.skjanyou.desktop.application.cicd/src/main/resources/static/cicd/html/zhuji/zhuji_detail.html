@@ -1,0 +1,71 @@
+<form id="detailUserForm" url="api/user/update" method="get"  class="layui-form" style="padding: 7px;">  
+    <div class="layui-form-item">
+		<label class="layui-form-label">账号</label>
+		<div class="layui-input-block">
+		   <input name="userid" placeholder="请输入账号" lay-verify="required" autocomplete="off" class="layui-input" type="text">
+		</div>
+	</div> 
+    <div class="layui-form-item">
+		<label class="layui-form-label">姓名</label>
+		<div class="layui-input-block">
+		   <input name="username" placeholder="请输入姓名" autocomplete="off" class="layui-input" type="text">
+		</div>
+	</div>
+    <div class="layui-form-item">
+		<label class="layui-form-label">性别</label>
+		<div class="layui-input-block">
+	    	<input type="radio" name="sex" value="男" title="男">
+	    	<input type="radio" name="sex" value="女" title="女" checked>
+		</div>
+	</div>
+    <div class="layui-form-item">
+		<label class="layui-form-label">年龄</label>
+		<div class="layui-input-block">
+		   <input name="age" placeholder="请输入年龄" autocomplete="off" class="layui-input" type="text">
+		</div>
+	</div>	
+    <div class="layui-form-item">
+		<label class="layui-form-label">角色</label>
+	    <div class="layui-input-block">
+	    	<select name="role" lay-verify="required">
+	        	<option value=""></option>
+	        	<option value="0">系统管理员</option>
+	        	<option value="1">普通用户</option>
+	      	</select>
+	    </div>
+	</div>	
+	<div class="layui-form-item">
+		<label class="layui-form-label">状态</label>
+		<div class="layui-input-block">
+		   <input type="checkbox" name="status" lay-skin="switch" lay-text="启用|停用">
+		</div>
+	</div>	
+	<div style="text-align: center;">
+		<button form-submit type="button"  class="layui-btn layui-btn-warm">提交</button>
+		<button layer-close type="button"  class="layui-btn layui-btn-danger">关闭</button>
+	</div>
+</form>		
+<script>
+layui.use(['jquery','element','form'],function(){
+	var $ = layui.jquery;
+	var element = layui.element;
+	var form = layui.form;
+	$.ajax({
+		type:"post",
+		url:"api/role/detail",
+		dataType: "text",
+		contentType: "html/text",
+		success: function(data){
+			$('#detailUserForm').fillFormData(data.data);
+		},
+		error:function(){
+			console.log('error');
+		},
+		complete: function(){
+			form.render();
+		}
+	});
+	
+});
+	
+</script>

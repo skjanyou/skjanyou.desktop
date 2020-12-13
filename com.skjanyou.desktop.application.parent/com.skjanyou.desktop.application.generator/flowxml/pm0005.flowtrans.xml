@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<flowtran id="pm0005" longname="查询分期产品列表" kind="Q" package="cn.sunline.suncard.pmtran.trans.pm" xsi:noNamespaceSchemaLocation="ltts-model.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <interface package="cn.sunline.suncard.pmtran.trans.pm.intf">
+        <input packMode="true">
+            <field id="busi_org_id" type="BaseType.U_ORGID" required="false" multi="false" array="false" longname="业务法人" ref="ApDict.A.busi_org_id"/>
+            <field id="product_code" type="BaseType.U_PRODUCTCODE" required="false" multi="false" array="false" longname="产品代码" ref="ApDict.A.product_code"/>
+        </input>
+        <output asParm="true" packMode="true">
+            <fields id="queryList" required="false" multi="true" longname="分期产品列表" array="false">
+                <field id="busi_org_id" type="BaseType.U_ORGID" required="false" multi="false" array="false" longname="业务法人" ref="ApDict.A.busi_org_id"/>
+                <field id="product_code" type="BaseType.U_PRODUCTCODE" required="true" multi="false" array="false" longname="产品代码" ref="ApDict.A.product_code"/>
+                <field id="product_name" type="BaseType.U_SHORTDESC" required="true" multi="false" array="false" longname="产品简称" ref="ApDict.A.product_name"/>
+                <field id="product_desc" type="BaseType.U_LONGESTDESC" required="false" multi="false" array="false" longname="产品描述" ref="ApDict.A.product_desc"/>
+                <field id="pro_status" type="EnumType.E_PRO_STATUS" required="false" multi="false" array="false" longname="产品状态" ref="ApDict.A.pro_status"/>
+                <field id="im_region" type="BaseType.U_BYTE10" required="false" multi="false" array="false" longname="分期额度区间" ref="PMDict.A.im_region"/>
+                <field id="im_term" type="BaseType.U_BYTE10" required="false" multi="false" array="false" longname="分期期限" ref="PMDict.A.im_term"/>
+                <field id="im_rate" type="BaseType.U_DECIMAL2" required="false" multi="false" array="false" longname="分期费率" ref="PMDict.A.im_rate"/>
+            </fields>
+        </output>
+        <property packMode="true"/>
+        <printer packMode="true"/>
+    </interface>
+    <flow>
+        <service serviceName="SrvPMProduct.selImProductList" id="SrvPMProduct.selImProductList" longname="查询分期产品列表">
+            <in_mappings by_interface="true">
+                <mapping src="busi_org_id" dest="busi_org_id" by_interface="true" on_top="true"/>
+                <mapping src="product_code" dest="product_code" by_interface="true" on_top="true"/>
+            </in_mappings>
+            <out_mappings by_interface="true">
+                <mapping src="queryList" dest="queryList" by_interface="true" on_top="true"/>
+            </out_mappings>
+        </service>
+    </flow>
+</flowtran>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!-- 性别 -->
+		<script type="text/html" id="sexTpl">
+			<input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="女|男" lay-filter="sexDemo" {{ d.sex == '男' ? 'checked' : '' }}>
+		</script>
+		
+		<!-- 状态 -->
+		<script type="text/html" id="statusTpl">
+  			<input type="checkbox" name="status" value="{{d.id}}" lay-skin="switch" {{ d.status == 'S' ? 'checked' : '' }} lay-text="启用|停用">
+		</script>
+		
+		<!-- 用户操作 -->
+		<script type="text/html" id="useroperateTpl">
+  			<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+  			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+		</script>
+		
+		
+		<fieldset class="layui-elem-field layui-field-title">
+			<legend>用户管理</legend>
+		</fieldset>		
+		<blockquote class="layui-elem-quote">
+			<div class="layui-btn-group">
+				<button id="addUserBtn" class="layui-btn layui-btn-warm" ><i class="layui-icon"></i>新增用户</button>
+				<button id="batDelUserBtn" class="layui-btn layui-btn-danger" >批量删除</button>
+			</div>
+		</blockquote>
+		<table class="layui-table" id="userTable" lay-filter="userTable" style="margin:5px 0px"></table>
+	</body>
+
+	<script src="static/supermsui/js/user.js" ></script>
+</html>
